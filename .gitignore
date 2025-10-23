@@ -3,6 +3,9 @@
 /.env.php.local
 ###< symfony/framework-bundle ###
 
+# Heroku
+/.heroku/
+
 ###> php ###
 # Composer
 /vendor/
