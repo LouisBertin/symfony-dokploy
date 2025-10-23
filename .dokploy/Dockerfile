@@ -36,20 +36,20 @@ RUN a2enmod rewrite headers
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Copy custom Apache configuration
-COPY ./conf/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Set working directory
 WORKDIR /var/www/html
 
 # Copy composer files first for better caching
-COPY ../composer.json ../composer.lock ./
+COPY composer.json composer.lock ./
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 
 # Copy application files
-COPY ../. .
+COPY . .
 
 # Create required directories and set permissions
 RUN mkdir -p var/cache var/log \
