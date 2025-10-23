@@ -55,4 +55,4 @@ RUN echo "memory_limit = 256M" > /usr/local/etc/php/conf.d/custom.ini \
 RUN php bin/console cache:clear --env=prod --no-warmup
 
 # Start the Messenger worker
-CMD ["php", "bin/console", "messenger:consume", "-vv"]
+CMD ["php", "bin/console", "messenger:consume"]
