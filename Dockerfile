@@ -70,7 +70,7 @@ RUN php bin/console cache:clear --env=prod --no-warmup \
     && php bin/console cache:warmup --env=prod
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 8080
 
 # Start Apache
 CMD ["apache2-foreground"]
