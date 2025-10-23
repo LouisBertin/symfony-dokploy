@@ -3,7 +3,7 @@
 ## Architecture
 
 ### Application Web (Dockerfile principal)
-- Serveur Apache + PHP 8.3
+- Serveur Apache + PHP 8.4
 - Routes web Symfony
 - Templates Twig
 - Port 80
