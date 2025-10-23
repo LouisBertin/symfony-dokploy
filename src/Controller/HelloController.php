@@ -15,4 +15,12 @@ class HelloController extends AbstractController
             'message' => 'Hello World',
         ]);
     }
+
+    #[Route('/hello/{name}', name: 'app_hello_name')]
+    public function helloName(string $name): Response
+    {
+        return $this->render('hello/name.html.twig', [
+            'name' => $name,
+        ]);
+    }
 }

@@ -1,40 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Hello World</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>{{ message }}</h1>
-        <p>Bienvenue sur votre application Symfony !!!</p>
-    </div>
-</body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ message }} - Symfony App{% endblock %}
+
+{% block body %}
+    <h1>{{ message }}</h1>
+    <p>Bienvenue sur votre application Symfony !!!</p>
+    <p>
+        Essayez la route dynamique :
+        <a href="{{ path('app_hello_name', {name: 'VotreNom'}) }}" class="back-link">
+            /hello/VotreNom
+        </a>
+    </p>
+{% endblock %}

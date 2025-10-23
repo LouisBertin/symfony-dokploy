@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}! - Symfony App{% endblock %}
+
+{% block body %}
+    <h1 class="highlight">Hello {{ name }}!</h1>
+    <p>Bienvenue <span class="highlight">{{ name }}</span> sur votre application Symfony personnalisée !</p>
+    <a href="{{ path('app_hello') }}" class="back-link">← Retour à l'accueil</a>
+{% endblock %}
