@@ -44,6 +44,11 @@ COPY composer.json composer.lock ./
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Create supervisor config for messenger worker and copy the file
+RUN mkdir -p /etc/supervisor/conf.d
+
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 # Copy application files
 COPY . .
 
@@ -63,17 +68,12 @@ RUN echo "memory_limit = 256M" > /usr/local/etc/php/conf.d/custom.ini \
     && echo "opcache.interned_strings_buffer=8" >> /usr/local/etc/php/conf.d/custom.ini \
     && echo "opcache.max_accelerated_files=4000" >> /usr/local/etc/php/conf.d/custom.ini
 
-# Create supervisor config for messenger worker
-RUN mkdir -p /etc/supervisor/conf.d
-
-COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Clear and warmup cache
 RUN php bin/console cache:clear --env=prod --no-warmup \
     && php bin/console cache:warmup --env=prod
 
 # Expose port 80
-EXPOSE 8080
+EXPOSE 80
 
 # Start Apache and Supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
