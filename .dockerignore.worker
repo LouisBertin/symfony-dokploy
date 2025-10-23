@@ -1,0 +1,13 @@
+.git
+.gitignore
+.dockerignore
+.dockerignore.worker
+Dockerfile
+Dockerfile.worker
+docker/
+apache.conf
+public/
+templates/
+src/Controller/
+*.md
+heroku/
