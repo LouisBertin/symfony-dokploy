@@ -42,7 +42,7 @@ COPY ./conf/apache.conf /etc/apache2/sites-available/000-default.conf
 WORKDIR /var/www/html
 
 # Copy composer files first for better caching
-COPY ../composer.json composer.lock ./
+COPY ../composer.json ../composer.lock ./
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
