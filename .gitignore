@@ -1,0 +1,69 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.php.local
+###< symfony/framework-bundle ###
+
+###> php ###
+# Composer
+/vendor/
+/composer.phar
+
+# Build
+/build/
+
+# Cache
+/var/cache/
+/var/log/
+
+# Sessions
+/var/sessions/*
+
+# Runtime
+/var/tmp/
+
+# PHPUnit
+/phpunit.xml
+/.phpunit.result.cache
+
+# Other
+/.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+
+###> doctrine/doctrine-bundle ###
+/ ### Doctrine ###
+  /build/
+  /vendor/
+
+###> symfony/messenger ###
+###< symfony/messenger ###
+
+###> symfony/scheduler ###
+###< symfony/scheduler ###
+
+###> symfony/asset ###
+/public/bundles/
+###< symfony/asset ###
+
+# Coverage reports
+coverage/
+clover.xml
+
+# Local environment files
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary files
+tmp/
+temp/
