@@ -1,4 +1,26 @@
 {
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "version": "1.0"
+        }
+    },
+    "doctrine/doctrine-bundle": {
+        "version": "2.18.0"
+    },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "3.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.1",
+            "ref": "1d01ec03c6ecbd67c3375c5478c9a423ae5d6a33"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "migrations/.gitignore"
+        ]
+    },
     "symfony/console": {
         "version": "7.3",
         "recipe": {
@@ -19,6 +41,15 @@
     },
     "symfony/framework-bundle": {
         "version": "v7.3.4"
+    },
+    "symfony/maker-bundle": {
+        "version": "1.64",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
     },
     "symfony/messenger": {
         "version": "7.3",

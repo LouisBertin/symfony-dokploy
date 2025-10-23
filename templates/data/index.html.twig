@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Données - Symfony App{% endblock %}
+
+{% block body %}
+    <h1 class="highlight">📊 Données de Test</h1>
+
+    <p>
+        <a href="{{ path('app_hello') }}" class="back-link">← Retour à l'accueil</a>
+        <a href="{{ path('app_data_add') }}" class="back-link">➕ Ajouter des données</a>
+    </p>
+
+    {% if testData is empty %}
+        <p>Aucune données trouvées. Utilisez la commande pour en ajouter !</p>
+    {% else %}
+        <div class="data-container">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background: rgba(255, 255, 255, 0.2);">
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">ID</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Nom</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Message</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in testData %}
+                        <tr style="{% if loop.index is odd %}background: rgba(255, 255, 255, 0.05);{% endif %}">
+                            <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.id }}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.name }}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.message }}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.createdAt|date('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 20px; opacity: 0.8;">
+            <small>Pour ajouter des données, utilisez : <code>php bin/console app:add-data</code></small>
+        </p>
+    {% endif %}
+{% endblock %}

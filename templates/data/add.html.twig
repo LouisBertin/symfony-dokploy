@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter des données - Symfony App{% endblock %}
+
+{% block body %}
+    <h1 class="highlight">➕ Ajouter des Données</h1>
+
+    <p>
+        <a href="{{ path('app_data') }}" class="back-link">← Voir les données</a>
+        <a href="{{ path('app_hello') }}" class="back-link">← Retour à l'accueil</a>
+    </p>
+
+    <div class="form-container" style="max-width: 500px; margin: 20px auto; text-align: left;">
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px;">
+            <h3>Utilisez la commande Symfony :</h3>
+            <p style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; margin: 10px 0;">
+                php bin/console app:add-data <nom> <message>
+            </p>
+
+            <h4>Exemples :</h4>
+            <ul style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 5px;">
+                <li><code>php bin/console app:add-data "Louis" "Bonjour depuis Symfony !"</code></li>
+                <li><code>php bin/console app:add-data "Test" "Ceci est un message de test"</code></li>
+                <li><code>php bin/console app:add-data "Demo" "Message d'exemple avec des caractères spéciaux !"</code></li>
+            </ul>
+
+            <p style="margin-top: 20px; opacity: 0.8;">
+                <small>Les données seront insérées dans la base MySQL et affichées sur la page /data</small>
+            </p>
+        </div>
+    </div>
+{% endblock %}
