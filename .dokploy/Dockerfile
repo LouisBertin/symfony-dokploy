@@ -39,7 +39,7 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 COPY .dokploy/conf/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Copy composer files first for better caching
 COPY composer.json composer.lock ./
@@ -53,8 +53,8 @@ COPY . .
 
 # Create required directories and set permissions
 RUN mkdir -p var/cache var/log \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html \
+    && chown -R www-data:www-data /app \
+    && chmod -R 755 /app \
     && chmod -R 777 var/cache var/log
 
 # Configure PHP
