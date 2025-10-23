@@ -3,7 +3,6 @@
 .dockerignore
 Dockerfile
 docker/
-.env
 .env.local
 .env.*.local
 var/cache/*
