@@ -33,7 +33,9 @@ class AddDataCommand extends Command
         }
 
         // Création de l'entité
-        $testData = new TestData($name, $message);
+        $testData = new TestData();
+        $testData->setName($name);
+        $testData->setMessage($message);
 
         // Sauvegarde en base de données
         $entityManager = $this->registry->getManager();

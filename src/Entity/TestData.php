@@ -21,10 +21,8 @@ class TestData
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $createdAt;
 
-    public function __construct(string $name, string $message)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->message = $message;
         $this->createdAt = new \DateTime();
     }
 
@@ -57,6 +55,12 @@ class TestData
     public function setMessage(string $message): self
     {
         $this->message = $message;
+        return $this;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

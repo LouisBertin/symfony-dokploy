@@ -2,16 +2,116 @@
 
 {% block title %}Données - Symfony App{% endblock %}
 
+{% block styles %}
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .form-group .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .form-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        .alert-success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        .alert-error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        .form-errors {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <h1 class="highlight">📊 Données de Test</h1>
 
     <p>
         <a href="{{ path('app_hello') }}" class="back-link">← Retour à l'accueil</a>
-        <a href="{{ path('app_data_add') }}" class="back-link">➕ Ajouter des données</a>
     </p>
 
+    {% for flash in app.flashes('success') %}
+        <div class="alert alert-success">
+            ✅ {{ flash }}
+        </div>
+    {% endfor %}
+
+    {% for flash in app.flashes('error') %}
+        <div class="alert alert-error">
+            ❌ {{ flash }}
+        </div>
+    {% endfor %}
+
+    <!-- Formulaire d'ajout -->
+    <div style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 10px; margin-bottom: 2rem;">
+        <h2 style="margin-top: 0; margin-bottom: 1rem;">➕ Ajouter une nouvelle donnée</h2>
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.message) }}
+                {{ form_widget(form.message) }}
+                {{ form_errors(form.message) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.submit) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+
     {% if testData is empty %}
-        <p>Aucune données trouvées. Utilisez la commande pour en ajouter !</p>
+        <p>Aucune données trouvées. Ajoutez-en avec le formulaire ci-dessus !</p>
     {% else %}
         <div class="data-container">
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -21,6 +121,7 @@
                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Nom</th>
                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Message</th>
                         <th style="padding: 10px; text-align: left; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Date</th>
+                        <th style="padding: 10px; text-align: center; border-bottom: 2px solid rgba(255, 255, 255, 0.3);">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,14 +131,17 @@
                             <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.name }}</td>
                             <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.message }}</td>
                             <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">{{ item.createdAt|date('d/m/Y H:i:s') }}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+                                <form action="{{ path('app_data_delete', {id: item.id}) }}" method="post" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette donnée ?');">
+                                    <button type="submit" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">
+                                        🗑️ Supprimer
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-
-        <p style="margin-top: 20px; opacity: 0.8;">
-            <small>Pour ajouter des données, utilisez : <code>php bin/console app:add-data</code></small>
-        </p>
     {% endif %}
 {% endblock %}
