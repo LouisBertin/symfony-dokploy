@@ -20,7 +20,7 @@ class TestTask implements ScheduleProviderInterface
     {
         return (new Schedule())
             ->add(
-                RecurringMessage::every('30 seconds', new TestMessage())
+                RecurringMessage::every('1 minute', new TestMessage())
             );
     }
 }
