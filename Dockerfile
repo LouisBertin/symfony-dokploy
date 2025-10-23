@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
-    supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 # Clear apt cache
@@ -44,10 +43,6 @@ COPY composer.json composer.lock ./
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Create supervisor config for messenger worker and copy the file
-RUN mkdir -p /etc/supervisor/conf.d
-
-COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy application files
 COPY . .
@@ -75,5 +70,5 @@ RUN php bin/console cache:clear --env=prod --no-warmup \
 # Expose port 80
 EXPOSE 80
 
-# Start Apache and Supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Start Apache
+CMD ["apache2-foreground"]
