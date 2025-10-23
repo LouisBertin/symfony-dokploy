@@ -35,6 +35,9 @@ RUN a2enmod rewrite headers
 # Configure Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Copy custom Apache configuration
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
+
 # Set working directory
 WORKDIR /var/www/html
 
