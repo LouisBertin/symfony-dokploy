@@ -44,6 +44,8 @@ class TestDataForm extends AbstractType
                 'background_color' => [255, 255, 255],
                 'background_images' => [],
                 'invalid_message' => 'Le code de sécurité est invalide.',
+                'reload' => true,
+                'as_url' => true
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
