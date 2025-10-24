@@ -30,6 +30,21 @@ class TestDataForm extends AbstractType
                     'rows' => 3
                 ]
             ])
+            ->add('captcha', 'Gregwar\CaptchaBundle\Type\CaptchaType', [
+                'label' => 'Veuillez recopier le code',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Code de sécurité'
+                ],
+                'width' => 200,
+                'height' => 50,
+                'length' => 6,
+                'quality' => 90,
+                'distortion' => true,
+                'background_color' => [255, 255, 255],
+                'background_images' => [],
+                'invalid_message' => 'Le code de sécurité est invalide.',
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
                 'attr' => [

@@ -105,6 +105,11 @@
                 {{ form_errors(form.message) }}
             </div>
             <div class="form-group">
+                {{ form_label(form.captcha) }}
+                {{ form_widget(form.captcha) }}
+                {{ form_errors(form.captcha) }}
+            </div>
+            <div class="form-group" style="margin-top: 1.5rem;">
                 {{ form_widget(form.submit) }}
             </div>
         {{ form_end(form) }}
