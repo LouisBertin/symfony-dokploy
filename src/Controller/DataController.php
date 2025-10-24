@@ -23,6 +23,11 @@ class DataController extends AbstractController
         // Récupérer les données existantes
         $data = $this->registry->getRepository(TestData::class)->findBy([], ['createdAt' => 'DESC']);
 
+        // Gérer le cas où aucune donnée n'existe
+        if (empty($data)) {
+            $this->addFlash('info', 'Aucune donnée disponible pour le moment. Ajoutez votre première donnée !');
+        }
+
         // Créer le formulaire d'ajout
         $testData = new TestData();
         $form = $this->createForm(TestDataForm::class, $testData);
