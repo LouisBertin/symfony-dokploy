@@ -68,6 +68,9 @@ RUN echo "memory_limit = 256M" > /usr/local/etc/php/conf.d/custom.ini \
     && echo "opcache.interned_strings_buffer=8" >> /usr/local/etc/php/conf.d/custom.ini \
     && echo "opcache.max_accelerated_files=4000" >> /usr/local/etc/php/conf.d/custom.ini
 
+# Make console globally available
+RUN ln -s /app/bin/console /usr/local/bin/console
+
 # Clear and warmup cache
 RUN php bin/console cache:clear --env=prod --no-warmup \
     && php bin/console cache:warmup --env=prod
