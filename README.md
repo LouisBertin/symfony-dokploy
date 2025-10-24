@@ -44,5 +44,12 @@
 
 ## Scheduler
 
-Le scheduler Symfony envoie des messages toutes les 30 secondes via le transport `async`.
+Le scheduler Symfony envoie des messages
 Le worker consomme ces messages et exécute les tâches correspondantes.
+
+## Local build
+
+```
+docker build -t symfony-test -f .dokploy/Dockerfile .
+docker run -p 8080:80 symfony-test
+```
