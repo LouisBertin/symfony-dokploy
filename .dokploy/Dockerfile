@@ -36,7 +36,7 @@ RUN a2enmod rewrite headers
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Copy custom Apache configuration
-COPY .dokploy/conf/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY .dokploy/config/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Set working directory
 WORKDIR /app

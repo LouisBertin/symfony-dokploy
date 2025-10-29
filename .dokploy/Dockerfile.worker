@@ -64,7 +64,7 @@ RUN chown -R app:app /app \
     && su app -c "php bin/console cache:clear --env=prod --no-warmup"
 
 # Copy supervisor configuration
-COPY .dokploy/conf/supervisord.conf /etc/supervisor/supervisord.conf
+COPY .dokploy/config/supervisord.conf /etc/supervisor/supervisord.conf
 
 # Fix supervisor logs permissions
 RUN chown -R app:app /var/log/supervisor
